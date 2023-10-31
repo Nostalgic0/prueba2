@@ -14,6 +14,7 @@ interface Iprops {
 function Productos({ background, color }: Iprops) {
     const [loading, setLoading] = useState(false)
     const [productosInfo, setProductosInfo] = useState<Products>();
+    const [data, setData] = useState<any>([])
 
 
     const handleSearch = () => {
@@ -25,12 +26,12 @@ function Productos({ background, color }: Iprops) {
         try {
             const response = await getFakeStore()
 
-            const productosData = response.data;
+            setData(response.data)
 
 
-            setProductosInfo(productosData);
+            //setProductosInfo(productosData);
 
-            console.log(productosData);
+            console.log(response.data);
 
             setLoading(false);
         } catch (error) {
@@ -56,16 +57,16 @@ function Productos({ background, color }: Iprops) {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {productosInfo ? productosInfo.map((producto: any) => (
+                        {data ? data.map((producto: any) => (
                             <tr >
                                 <td>{producto.title}</td>
                                 <td>{producto.price}</td>
                             </tr>
-                        )) : ''} */}
-                        <tr>
+                        )) : ''}
+                        {/* <tr>
                             <td>{productosInfo ? productosInfo.title : ''}</td>
                             <td>{productosInfo ? productosInfo.price : ''}</td>
-                        </tr>
+                        </tr> */}
                         {/* {productosInfo ? productosInfo.title.map((title: string, index: any) => (
                             <tr key={index}>
                                 <td>{title}</td>
